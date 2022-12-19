@@ -53,6 +53,7 @@ st.line_chart(chart_data)
 
 st.caption("This line chart displays the diffrent spectral classes and colors of stars.")
 
+st.code(code, language='python')
 
 
 
