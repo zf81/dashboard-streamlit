@@ -2,7 +2,7 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-
+import altair as alt
 
 st.title('Stars: Temperature (K), Luminosity(L/Lo), Radius(R/Ro), Spectral Class, Color, and Absolute Magnitude')
 
@@ -27,39 +27,33 @@ code= '''def scroll(): print("Scroll Down To See Charts")'''
 st.code(code, language='python')
 
 ## Dataframe and Chart 1: Star Temperature and Luminosity  ##
-st.subheader('Temperature of Stars Against Their Luminosity ')
+st.subheader('Temperature (K) of Stars Against Their Luminosity (L/lo) ')
 
 stars = pd.read_csv('https://raw.githubusercontent.com/zf81/dashboard-streamlit/main/data/Stars.csv')
 
-temperature = pd.DataFrame(
-    np.random.randn(20, 3),
-    columns=["temperature", "luminosity"])
+df1 = df[['temperature', 'luminosity']].copy()
 
-st.bar_chart(temperature)
+chart_data = pd.DataFrame(
+    np.random.randn(20, 2),
+    columns=['temperature', 'luminosity'])
+
+c = alt.Chart(chart_data).mark_circle().encode(
+    x='temperature', y='luminosity', tooltip=['temperature', 'luminosity'])
+
+st.altair_chart(c, use_container_width=True)
+
+st.caption("This alt air chart displays the temperatures of different stars in Kelvin against their luminosities (L/lo).")
 
 
+## DataFrame and Chart 2: Spectral Classes and Colors of Stars ##
 
-################################################################
-## Dataframe and Chart 1: BMI Levels ##
-st.subheader('BMI Levels Among Patients')
-
-diabetes = pd.read_csv('diabetes.csv')
-
-BMI = diabetes['BMI'].value_counts()
-
-st.bar_chart(BMI)
-
-st.caption("This bar chart illustrates the count of unique BMI levels among female patients.")
-
-## DataFrame and Chart 2: Vitals Among Patients ##
-st.subheader('Vitals Levels Among Patients')
-
-chart_data = pd.DataFrame(np.random.randn(20, 4), columns=['Glucose','Insulin','BloodPressure', 'Pregnancies'])
+chart_data = pd.DataFrame(
+    np.random.randn(20, 2),
+    columns=['spectral class', 'color'])
 
 st.line_chart(chart_data)
 
-st.caption("This line chart illustrates to vitals levels of female patients used as diagnostic measurements to predict diabetes.")
- 
+st.caption("This line chart displays the diffrent spectral classes and colors of stars.")
 
 
 
