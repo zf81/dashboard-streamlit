@@ -31,8 +31,6 @@ st.subheader('Temperature (K) of Stars Against Their Luminosity (L/lo) ')
 
 stars = pd.read_csv('https://raw.githubusercontent.com/zf81/dashboard-streamlit/main/data/Stars.csv')
 
-df1 = df[['temperature', 'luminosity']].copy()
-
 chart_data = pd.DataFrame(
     np.random.randn(20, 2),
     columns=['temperature', 'luminosity'])
